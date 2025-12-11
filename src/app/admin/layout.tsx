@@ -1,7 +1,9 @@
 import { Metadata } from 'next';
+import { Suspense } from 'react';
+import { AdminNav } from './components/AdminNav';
 
 export const metadata: Metadata = {
-  title: 'Admin | Publishing Engine',
+  title: 'Admin | ink',
   robots: 'noindex, nofollow',
 };
 
@@ -14,20 +16,9 @@ export default function AdminLayout({ children }: AdminLayoutProps) {
     <div className="min-h-screen bg-gray-50">
       <header className="sticky top-0 z-50 border-b border-gray-200 bg-white/95 backdrop-blur">
         <div className="max-w-6xl mx-auto px-6 flex h-14 items-center">
-          <nav className="flex items-center gap-6 text-sm">
-            <a href="/admin" className="font-semibold text-gray-900">
-              Publishing Engine
-            </a>
-            <a href="/admin" className="text-gray-500 hover:text-gray-900 transition-colors">
-              Content
-            </a>
-            <a href="/admin/import" className="text-gray-500 hover:text-gray-900 transition-colors">
-              Import
-            </a>
-            <a href="/admin/settings" className="text-gray-500 hover:text-gray-900 transition-colors">
-              Settings
-            </a>
-          </nav>
+          <Suspense fallback={<div className="text-sm text-gray-400">Loading...</div>}>
+            <AdminNav />
+          </Suspense>
         </div>
       </header>
       <main className="max-w-6xl mx-auto px-6 py-6">
